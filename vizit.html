@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kostik Kim — Dark Fantasy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #0b0b0c;
+      background-image: url('https://www.transparenttextures.com/patterns/black-felt.png');
+      color: #ccc;
+      position: relative;
+      transition: background 0.5s ease, color 0.5s ease;
+      perspective: 1000px;
+    }
+
+    [data-theme="frogs"] body {
+  background-color: #e5ffe7;
+  background-image: url('https://www.transparenttextures.com/patterns/green-dust-and-scratches.png');
+  color: #043d0f;
+}
+
+
+    .card {
+      background: rgba(20, 20, 20, 0.85);
+      padding: 2.5rem 3rem;
+      border-radius: 12px;
+      box-shadow: 0 0 25px rgba(255, 0, 0, 0.07);
+      max-width: 440px;
+      text-align: center;
+      position: relative;
+      border: 1px solid rgba(200, 200, 200, 0.05);
+      z-index: 2;
+      transition: all 0.4s ease;
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+
+    [data-theme="frogs"] .card {
+      background: #e7ffe7;
+      border: 2px dashed #2f8034;
+      box-shadow: 0 0 10px #97e093;
+    }
+
+    h1 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #ff5555;
+      text-shadow: 0 0 6px #ff0000a0;
+    }
+
+    [data-theme="frogs"] h1 {
+      color: #2a802a;
+      text-shadow: 0 0 3px #b1ffb1;
+    }
+
+    .glow-line {
+      width: 90%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #ff3333, transparent);
+      margin: 1.5rem auto;
+      box-shadow: 0 0 6px #ff4444aa;
+      border-radius: 2px;
+    }
+
+    [data-theme="frogs"] .glow-line {
+      background: linear-gradient(to right, transparent, #4caf50, transparent);
+      box-shadow: 0 0 6px #4caf50aa;
+    }
+
+    .slogan {
+      margin-top: 1.2rem;
+      font-size: 13px;
+      font-style: italic;
+      color: #666;
+    }
+
+    [data-theme="frogs"] .slogan {
+      color: #2c612c;
+    }
+
+    .toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: #1a1a1a;
+      color: #eee;
+      border: 1px solid #444;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      z-index: 3;
+    }
+
+    .toggle:hover {
+      background: #440000;
+      box-shadow: 0 0 10px #ff0000a0;
+    }
+
+    [data-theme="frogs"] .toggle {
+      background: #43a047;
+      color: white;
+      border: none;
+      box-shadow: 0 0 10px #a5d6a7;
+    }
+  </style>
+</head>
+<body>
+  <div class="card" id="card">
+    <button class="toggle" onclick="toggleTheme()">🌓 Theme</button>
+    <h1>Kostik Kim</h1>
+    <div class="glow-line"></div>
+    <p>Professional Whiner</p>
+    <p>Email: biba-bobov@fake.id</p>
+    <p id="location">Based in the Shadows of Prague</p>
+    <div class="slogan">“Pain is temporary. Whining is eternal.”</div>
+  </div>
+
+  <script>
+  const card = document.getElementById('card');
+  const html = document.documentElement;
+  const slogan = card.querySelector('.slogan');
+ 
+
+  function toggleTheme() {
+    const current = html.getAttribute("data-theme");
+    const next = current === "dark" ? "frogs" : "dark";
+    html.setAttribute("data-theme", next);
+    updateSlogan(next);
+  }
+
+  function updateSlogan(theme) {
+    if (theme === "frogs") {
+      slogan.textContent = "“Kindness is the greatest magic.”";
+    } else {
+      slogan.textContent = "“Pain is temporary. Whining is eternal.”";
+    }
+  }
+
+  // 3D эффект
+  document.addEventListener('mousemove', e => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 20;
+    const y = (e.clientY / window.innerHeight - 0.5) * 20;
+    card.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
+  });
+
+  document.addEventListener('mouseleave', () => {
+    card.style.transform = `rotateY(0deg) rotateX(0deg)`;
+  });
+</script>
+</body>
+</html>
